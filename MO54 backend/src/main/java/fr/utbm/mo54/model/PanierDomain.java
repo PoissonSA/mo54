@@ -21,4 +21,8 @@ public class PanierDomain {
 
     @Column(name = "number")
     private Integer number;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pid",insertable=false,updatable=false)
+    private PieceDomain pieceDomain;
 }
