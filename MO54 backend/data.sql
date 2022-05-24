@@ -6,7 +6,7 @@ create table `piece` (
     `name` varchar(50) NOT NULL DEFAULT '',
     `price` int(50) NOT NULL DEFAULT 0,
     `type` int(11) NOT NULL DEFAULT 0,
-    `rate` varchar(10),
+    `rate` varchar(10) NOT NULL DEFAULT '0',
     `ctimes` int(11) NOT NULL DEFAULT 0,
     `imgurl` varchar(255),
     primary key(`id`)
@@ -19,3 +19,7 @@ create table `panier` (
     `number` int(50) NOT NULL DEFAULT 0,
     primary key(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into piece (name,price,type,imgurl)
+values
+    ('text',10,0,'text.jpg')
