@@ -20,16 +20,10 @@ public class PieceDomain {
     private String name;
 
     @Column(name = "price")
-    private Integer price;
+    private String price;
 
     @Column(name = "type")
-    private Integer type;
-
-    @Column(name = "rate")
-    private String rate;
-
-    @Column(name = "ctimes")
-    private Integer ctimes;
+    private String type;
 
     @Column(name = "imgurl")
     private String imgurl;

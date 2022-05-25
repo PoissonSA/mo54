@@ -23,7 +23,7 @@ public class BaseController {
     IPanierDao iPanierDao;
 
     @GetMapping("queryAllPieceByType")
-    public List<PieceDomain> queryAllPieceByType(@RequestParam(value = "type",required = true) Integer type){
+    public List<PieceDomain> queryAllPieceByType(@RequestParam(value = "type",required = true) String type){
         return iPieceDao.getAllPieceByType(type);
     }
 
