@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IPieceDao extends JpaRepository<PieceDomain,Integer> {
 
-    @Query(nativeQuery=true, value ="select * from piece p where p.type=:type")
-    List<PieceDomain> getAllPieceByType(@Param(value = "type") String type);
+    @Query(nativeQuery=true, value ="select * from piece p where p.type1=:type1")
+    List<PieceDomain> getAllPieceByType(@Param(value = "type1") String type1);
 
 }

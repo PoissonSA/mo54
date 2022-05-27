@@ -22,8 +22,14 @@ public class PieceDomain {
     @Column(name = "price")
     private String price;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "type1")
+    private String type1;
+
+    @Column(name = "type2")
+    private String type2;
+
+    @Column(name = "rate")
+    private String rate;
 
     @Column(name = "imgurl")
     private String imgurl;
