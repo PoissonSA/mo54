@@ -12,4 +12,7 @@ public interface IPieceDao extends JpaRepository<PieceDomain,Integer> {
     @Query(nativeQuery=true, value ="select * from piece p where p.type1=:type1")
     List<PieceDomain> getAllPieceByType(@Param(value = "type1") String type1);
 
+    @Query(nativeQuery=true, value ="select * from piece order by rate desc limit 6;")
+    List<PieceDomain> getHighestRatePiece();
+
 }

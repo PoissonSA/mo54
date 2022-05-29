@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,6 +23,18 @@ public class BaseController {
 
     @Autowired
     IPanierDao iPanierDao;
+
+    @PostMapping("queryCurTime")
+    public String queryCurTime(){
+        Date dNow = new Date( );
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+        return ft.format(dNow);
+    }
+
+    @GetMapping("queryHighestRatePiece")
+    public List<PieceDomain> queryHighestRatePiece(){
+        return iPieceDao.getHighestRatePiece();
+    }
 
     @GetMapping("queryAllPieceByType")
     public List<PieceDomain> queryAllPieceByType(@RequestParam(value = "type1",required = true) String type1){
