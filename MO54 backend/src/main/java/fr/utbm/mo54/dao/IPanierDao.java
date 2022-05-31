@@ -1,7 +1,6 @@
 package fr.utbm.mo54.dao;
 
 import fr.utbm.mo54.model.PanierDomain;
-import fr.utbm.mo54.model.PieceDomain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,10 +16,11 @@ public interface IPanierDao extends JpaRepository<PanierDomain,Integer> {
 
     @Modifying
     @Transactional
-    @Query(nativeQuery=true, value ="insert into panier (pid,number) " +
-            "values (:pid, :number) ")
+    @Query(nativeQuery=true, value ="insert into panier (pid,number,brand) " +
+            "values (:pid, :number, :brand) ")
     int addPiece(@Param("pid") Integer pid,
-                @Param("number") Integer number
+                 @Param("number") Integer number,
+                 @Param("brand") String brand
     );
 
     @Modifying
@@ -32,4 +32,9 @@ public interface IPanierDao extends JpaRepository<PanierDomain,Integer> {
     @Transactional
     @Query(nativeQuery=true, value ="delete from panier p where p.id=:id")
     int deletePiece(@Param("id") Integer id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery=true, value ="delete from panier")
+    void deleteAll();
 }

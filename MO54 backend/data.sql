@@ -20,6 +20,16 @@
 --
 create database mo54;
 use mo54;
+
+CREATE TABLE `Order` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `pid` int NOT NULL,
+    `number` int NOT NULL DEFAULT '0',
+    `brand` varchar(100) NOT NULL DEFAULT '',
+    `time` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 DROP TABLE IF EXISTS `panier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -27,6 +37,7 @@ CREATE TABLE `panier` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pid` int NOT NULL,
   `number` int NOT NULL DEFAULT '0',
+  `brand` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;

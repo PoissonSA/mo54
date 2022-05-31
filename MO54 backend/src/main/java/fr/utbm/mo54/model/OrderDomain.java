@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "panier")
+@Table(name = "order")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PanierDomain {
+public class OrderDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -24,6 +24,9 @@ public class PanierDomain {
 
     @Column(name = "brand")
     private String brand;
+
+    @Column(name = "time")
+    private String time;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pid",insertable=false,updatable=false)

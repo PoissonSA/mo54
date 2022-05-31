@@ -1,7 +1,9 @@
 package fr.utbm.mo54.controller;
 
+import fr.utbm.mo54.dao.IOrderDao;
 import fr.utbm.mo54.dao.IPanierDao;
 import fr.utbm.mo54.dao.IPieceDao;
+import fr.utbm.mo54.model.OrderDomain;
 import fr.utbm.mo54.model.PanierDomain;
 import fr.utbm.mo54.model.PieceDomain;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,9 @@ public class BaseController {
     @Autowired
     IPanierDao iPanierDao;
 
-    @PostMapping("queryCurTime")
+    @Autowired
+    IOrderDao iOrderDao;
+
     public String queryCurTime(){
         Date dNow = new Date( );
         SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
@@ -46,10 +50,26 @@ public class BaseController {
         return iPanierDao.getAllPieceInPanier();
     }
 
+    @GetMapping("queryAllOrder")
+    public List<OrderDomain> queryAllOrder(){
+        return iOrderDao.getAllOrder();
+    }
+
     @PostMapping("addPieceToPanier")
     public void addPieceToPanier(@RequestParam(value = "pid",required = true) Integer pid,
-                                 @RequestParam(value = "number",required = true) Integer number){
-        iPanierDao.addPiece(pid,number);
+                                 @RequestParam(value = "number",required = true) Integer number,
+                                 @RequestParam(value = "brand",required = true) String brand){
+        iPanierDao.addPiece(pid,number,brand);
+    }
+
+    @PostMapping("commitOrder")
+    public void commitOrder(){
+        List<PanierDomain> datas=iPanierDao.getAllPieceInPanier();
+        String time=queryCurTime();
+        for(PanierDomain data:datas){
+            iOrderDao.addOrder(data.getPid(),data.getNumber(),data.getBrand(),time);
+        }
+        iPanierDao.deleteAll();
     }
 
     @PostMapping("changeNumberOfPieceToPanier")
