@@ -31,7 +31,7 @@ public class BaseController {
 
     public String queryCurTime(){
         Date dNow = new Date( );
-        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
         return ft.format(dNow);
     }
 
@@ -46,30 +46,31 @@ public class BaseController {
     }
 
     @GetMapping("queryAllPieceInPanier")
-    public List<PanierDomain> queryAllPieceInPanier(){
-        return iPanierDao.getAllPieceInPanier();
+    public List<PanierDomain> queryAllPieceInPanier(@RequestParam(value = "user",required = true) String user){
+        return iPanierDao.getAllPieceInPanier(user);
     }
 
     @GetMapping("queryAllOrder")
-    public List<OrderDomain> queryAllOrder(){
-        return iOrderDao.getAllOrder();
+    public List<OrderDomain> queryAllOrder(@RequestParam(value = "user",required = true) String user){
+        return iOrderDao.getAllOrder(user);
     }
 
     @PostMapping("addPieceToPanier")
     public void addPieceToPanier(@RequestParam(value = "pid",required = true) Integer pid,
                                  @RequestParam(value = "number",required = true) Integer number,
-                                 @RequestParam(value = "brand",required = true) String brand){
-        iPanierDao.addPiece(pid,number,brand);
+                                 @RequestParam(value = "brand",required = true) String brand,
+                                 @RequestParam(value = "user",required = true) String user){
+        iPanierDao.addPiece(pid,number,brand,user);
     }
 
     @PostMapping("commitOrder")
-    public void commitOrder(){
-        List<PanierDomain> datas=iPanierDao.getAllPieceInPanier();
+    public void commitOrder(@RequestParam(value = "user",required = true) String user){
+        List<PanierDomain> datas=iPanierDao.getAllPieceInPanier(user);
         String time=queryCurTime();
         for(PanierDomain data:datas){
-            iOrderDao.addOrder(data.getPid(),data.getNumber(),data.getBrand(),time);
+            iOrderDao.addOrder(data.getPid(),data.getNumber(),data.getBrand(),time,user);
         }
-        iPanierDao.deleteAll();
+        iPanierDao.deleteAll(user);
     }
 
     @PostMapping("changeNumberOfPieceToPanier")

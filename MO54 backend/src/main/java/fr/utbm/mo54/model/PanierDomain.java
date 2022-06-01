@@ -25,6 +25,9 @@ public class PanierDomain {
     @Column(name = "brand")
     private String brand;
 
+    @Column(name = "user")
+    private String user;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pid",insertable=false,updatable=false)
     private PieceDomain pieceDomain;

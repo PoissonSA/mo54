@@ -12,16 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface IOrderDao extends JpaRepository<OrderDomain,Integer> {
-    @Query(nativeQuery=true, value ="select * from `order`")
-    List<OrderDomain> getAllOrder();
+    @Query(nativeQuery=true, value ="select * from `order` o where o.user=:user")
+    List<OrderDomain> getAllOrder(@Param("user") String user);
 
     @Modifying
     @Transactional
-    @Query(nativeQuery=true, value ="insert into `order` (pid,number,brand,time) " +
-            "values (:pid, :number, :brand, :time) ")
+    @Query(nativeQuery=true, value ="insert into `order` (pid,number,brand,time,user) " +
+            "values (:pid, :number, :brand, :time, :user) ")
     int addOrder(@Param("pid") Integer pid,
                  @Param("number") Integer number,
                  @Param("brand") String brand,
-                 @Param("time") String time
+                 @Param("time") String time,
+                 @Param("user") String user
     );
 }

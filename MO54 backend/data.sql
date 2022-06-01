@@ -27,6 +27,7 @@ CREATE TABLE `Order` (
     `number` int NOT NULL DEFAULT '0',
     `brand` varchar(100) NOT NULL DEFAULT '',
     `time` varchar(100) NOT NULL,
+    `user` varchar(100) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -38,6 +39,7 @@ CREATE TABLE `panier` (
   `pid` int NOT NULL,
   `number` int NOT NULL DEFAULT '0',
   `brand` varchar(100) NOT NULL DEFAULT '',
+  `user` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
