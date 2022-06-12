@@ -83,4 +83,9 @@ public class BaseController {
     public void deletePieceInPanier(@RequestParam(value = "id",required = true) Integer id){
         iPanierDao.deletePiece(id);
     }
+
+    @PostMapping("deleteAll")
+    public void deletePieceInPanier(@RequestParam(value = "user",required = true) String user){
+        iPanierDao.deleteAll(user);
+    }
 }
